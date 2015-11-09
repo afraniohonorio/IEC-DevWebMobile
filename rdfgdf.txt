@@ -1,1 +1,9 @@
-sadfa
+
+git add .
+git commit -m "comentario"
+
+>>puxar atualizacao do repositorio
+git pull origin master
+
+>>subir atualizacao para o repositorio
+git push origin master
