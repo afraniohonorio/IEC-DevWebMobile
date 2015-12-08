@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Trabalho Prático WEB Mobile</title>
+		<meta charset="utf-8">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+</script>
+<![endif]-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+$.ajax({
+  url: 'https://randomuser.me/api/',
+  dataType: 'json',
+  success: function(data){
+    console.log(data);    
+    var aux = data.results;
+    $("#txtSexo").val(aux[0].user.gender); 
+    $("#txtTitulo").val(aux[0].user.name.title);
+ 	$("#txtPrimeiro").val(aux[0].user.name.first);
+    $("#txtUltimo").val(aux[0].user.name.last);
+    $("#txtRua").val(aux[0].user.location.street);
+    $("#txtCidade").val(aux[0].user.location.city);
+    $("#txtEstado").val(aux[0].user.location.state);
+    $("#txtCep").val(aux[0].user.location.zip);
+    $("#txtUsuario").val(aux[0].user.username);
+ 	$("#txtEmail").val(aux[0].user.email);
+    $("#txtSenha").val(aux[0].user.password);
+    $("#txtTelefone").val(aux[0].user.phone);
+ 	$("#txtCelular").val(aux[0].user.cell);
+ 	$("#txtNacionalidade").val(data.nationality);
+ 	$("#txtLarge").val(aux[0].user.picture.large);
+ 	$("#txtMedium").val(aux[0].user.picture.medium);
+ 	$("#txtThumbnail").val(aux[0].user.picture.thumbnail);
+ 	
+ 	
+  }
+});
+
+$(function(){ 
+	listaUsuarios = window.localStorage.getItem("listaUsuarios");// Recupera os dados armazenados 
+	listaUsuarios = JSON.parse(listaUsuarios); // Converte string para objeto 
+	if(listaUsuarios == null) // Caso não haja conteúdo, iniciamos um vetor vazio 
+		listaUsuarios = []; 
+});
+
+function Adicionar(){ 
+	var usuario = JSON.stringify({ 
+		
+		Sexo : $("#txtSexo").val(),
+    	Titulo : $("#txtTitulo").val(),
+ 		Primeiro : $("#txtPrimeiro").val(),
+    	Ultimo : $("#txtUltimo").val(),
+    	Rua : $("#txtRua").val(),
+    	Cidade : $("#txtCidade").val(),
+    	Estado : $("#txtEstado").val(),
+    	Cep : $("#txtCep").val(),
+    	Usuario : $("#txtUsuario").val(),
+ 		Email : $("#txtEmail").val(),
+    	Senha : $("#txtSenha").val(),
+    	Telefone : $("#txtTelefone").val(),
+ 		Celular : $("#txtCelular").val(),
+ 		Large : $("#txtLarge").val(),
+ 		Medium : $("#txtMedium").val(),
+ 		Thumbnail : $("#txtThumbnail").val(),
+ 		Nacionalidade : $("#txtNacionalidade").val()
+ 	}); 
+	listaUsuarios.push(usuario); 
+	window.localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios)); 
+	alert("Registro adicionado."); 
+	return true; 
+}
+
+$(document).ready(function(){
+    $("form").submit(function(){
+        return Adicionar(); 
+    });
+});
+
+
+</script>
+
+<style>
+	body {font-family: Verdana, sans-serif; font-size:0.8em;}
+	 nav, section, article, footer
+		{border:1px solid grey; margin:5px; padding:8px;}
+	nav ul {margin:0; padding:0;}
+	nav ul li {display:inline; margin:5px;}
+</style>
+	</head>
+
+<body>
+
+	<header>
+		<h1>Trabalho Prático WEB Mobie</h1>
+	</header>
+
+	<nav>
+		<ul>
+  			<li><a href="lista.html">Lista de Usuários</a></li>
+  			<li><a href="index.html">Cadastro de Usuários</a></li>
+  		</ul>
+	</nav>
+
+	<section>
+
+	<h2>Cadastro de Usuários</h2>
+	<article>
+		<p>
+			*Um usuário pode ser gerado automáticamente, você pode inserir os dados manualmente.
+		</p>
+	</article>
+
+	<article>
+		<form >
+			<ul>
+				<li>
+					<label for="txtUsuario">Usuario:</label>
+				</li>
+				<li>
+					<label for="txtSexo">Sexo:</label>
+					<input type="text" id="txtSexo"/>
+				</li>
+				<li><label for="txtNome">Nome:</label>
+					<ul>	
+						<li>
+							<label for="txtTitulo">Título:</label>
+							<input type="text" id="txtTitulo"/>
+						</li>
+						<li>
+							<label for="txtPrimeiro">Primeiro:</label>
+							<input type="text" id="txtPrimeiro"/>
+						</li>
+						<li>
+							<label for="txtUltimo">Último:</label>
+							<input type="text" id="txtUltimo"/>
+						</li>
+					</ul>
+				</li>
+				
+				<li><label for="txtEndereco">Endereço:</label>
+					<ul>
+						<li>
+							<label for="txtRua">Rua:</label>
+							<input type="text" id="txtRua"/>
+						</li>
+						<li>
+							<label for="txtCidade">Cidade:</label>
+							<input type="text" id="txtCidade"/>
+						</li>
+						<li>
+							<label for="txtEstado">Estado:</label>
+							<input type="text" id="txtEstado"/>
+						</li>
+						<li>
+							<label for="txtCep">Cep:</label>
+							<input type="text" id="txtCep"/>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<label for="txtEmail">Email:</label>
+					<input type="text" id="txtEmail"/>
+				</li>
+				<li>
+					<label for="txtUsuario">Usuario:</label>
+					<input type="text" id="txtUsuario"/>
+				</li>
+				<li>
+					<label for="txtSenha">Senha:</label>
+					<input type="text" id="txtSenha"/>
+				</li>
+				<li>
+					<label for="txtTelefone">Telefone:</label>
+					<input type="text" id="txtTelefone"/>
+				</li>
+				<li>
+					<label for="txtCelular">Celular:</label>
+					<input type="text" id="txtCelular"/>
+				</li>
+				<li>
+					<label for="txtNacionalidade">Nacionalidade:</label>
+					<input type="text" id="txtNacionalidade"/>
+				</li>
+				<li><label for="txtImagem">Imagem:</label>
+					<ul>
+						<li>
+							<label for="txtLarge">Large:</label>
+							<input type="text" id="txtLarge"/>
+						</li>
+						<li>
+							<label for="txtMedium">Medium:</label>
+							<input type="text" id="txtMedium"/>
+						</li>
+						<li>
+							<label for="txtThumbnail">Thumbnail:</label>
+							<input type="text" id="txtThumbnail"/>
+						</li>
+					</ul>
+				</li>
+				</li>
+				<li>
+					<input type="submit" value="Salvar" id="btnSalvar"/>
+				</li>
+
+
+			</ul>	
+
+		</form>
+
+	</article>
+
+	</section>
+
+<footer>
+<p>&copy; 2015. Todos os direitos reservados</p>
+</footer>
+
+</body>
+</html>

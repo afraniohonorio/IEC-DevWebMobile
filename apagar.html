@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Trabalho Prático WEB Mobile</title>
+		<meta charset="utf-8">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+</script>
+<![endif]-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function(){ 
+	listaUsuarios = window.localStorage.getItem("listaUsuarios");// Recupera os dados armazenados 
+	listaUsuarios = JSON.parse(listaUsuarios); // Converte string para objeto 
+//	if(listaUsuarios == null) // Caso não haja conteúdo, iniciamos um vetor vazio 
+//		listaUsuarios = []; 
+	id = -1;
+    var url = location.href;
+    if (url.indexOf("?") > 0) {
+      	query = url.split("?"); 
+       	param = query[1].split("&");
+       	for (i=0; i < param.length; i++) { 
+       		v = param[i].split("="); 
+       		eval("var "+v[0]+"='"+v[1]+"';"); 
+       	} 
+       	id = parseInt(codigo); 
+       	Excluir();
+	} 
+});
+
+function Excluir(){
+	listaUsuarios.splice(id, 1);
+	localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+  
+}
+
+
+</script>
+
+<style>
+	body {font-family: Verdana, sans-serif; font-size:0.8em;}
+	 nav, section, article, footer
+		{border:1px solid grey; margin:5px; padding:8px;}
+	nav ul {margin:0; padding:0;}
+	nav ul li {display:inline; margin:5px;}
+</style>
+	</head>
+
+<body>
+
+	<header>
+		<h1>Trabalho Prático WEB Mobie</h1>
+	</header>
+
+	<nav>
+		<ul>
+  			<li><a href="lista.html">Lista de Usuários</a></li>
+  			<li><a href="index.html">Cadastro de Usuários</a></li>
+  		</ul>
+	</nav>
+
+	<section>
+
+	<h2>Apagar Usuário</h2>
+	<article>
+		<h3>Usuário excluído.</h3>
+	</article>
+
+	</section>
+
+<footer>
+<p>&copy; 2015. Todos os direitos reservados</p>
+</footer>
+
+</body>
+</html>
