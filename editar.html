@@ -3,86 +3,100 @@
 	<head>
 		<title>Trabalho Prático WEB Mobile</title>
 		<meta charset="utf-8">
-
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
 </script>
 <![endif]-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
+    
+    $(function () {
+        listaUsuarios = window.localStorage.getItem("listaUsuarios"); // Recupera os dados armazenados 
+        listaUsuarios = JSON.parse(listaUsuarios); // Converte string para objeto 
+        //  if(listaUsuarios == null) // Caso não haja conteúdo, iniciamos um vetor vazio 
+        //      listaUsuarios = []; 
+        id = -1;
+        var url = location.href;
+        if (url.indexOf("?") > 0) {
+            query = url.split("?");
+            param = query[1].split("&");
+            for (i = 0; i < param.length; i++) {
+                v = param[i].split("=");
+                eval("var " + v[0] + "='" + v[1] + "';");
+            }
+            id = parseInt(codigo);
+            var usuario = JSON.parse(listaUsuarios[id]);
+            $("#txtCodigo").val(codigo);
+            $("#txtSexo").val(usuario.Sexo);
+            $("#txtTitulo").val(usuario.Titulo);
+            $("#txtPrimeiro").val(usuario.Primeiro);
+            $("#txtUltimo").val(usuario.Ultimo);
+            $("#txtRua").val(usuario.Rua);
+            $("#txtCidade").val(usuario.Cidade);
+            $("#txtEstado").val(usuario.Estado);
+            $("#txtCep").val(usuario.Cep);
+            $("#txtUsuario").val(usuario.Usuario);
+            $("#txtEmail").val(usuario.Email);
+            $("#txtSenha").val(usuario.Senha);
+            $("#txtTelefone").val(usuario.Telefone);
+            $("#txtCelular").val(usuario.Celular);
+            $("#txtNacionalidade").val(usuario.Nacionalidade);
+            $("#txtLarge").val(usuario.Large);
+            $("#txtMedium").val(usuario.Medium);
+            $("#txtThumbnail").val(usuario.Thumbnail);
+            $("#txtCodigo").attr("readonly", "readonly");
+            $("#txtSexo").focus();
 
-$(function(){ 
-	listaUsuarios = window.localStorage.getItem("listaUsuarios");// Recupera os dados armazenados 
-	listaUsuarios = JSON.parse(listaUsuarios); // Converte string para objeto 
-//	if(listaUsuarios == null) // Caso não haja conteúdo, iniciamos um vetor vazio 
-//		listaUsuarios = []; 
-	id = -1;
-    var url = location.href;
-    if (url.indexOf("?") > 0) {
-      	query = url.split("?"); 
-       	param = query[1].split("&");
-       	for (i=0; i < param.length; i++) { 
-       		v = param[i].split("="); 
-       		eval("var "+v[0]+"='"+v[1]+"';"); 
-       	} 
-       	id = parseInt(codigo); 
-       	var usuario = JSON.parse(listaUsuarios[id]); 
-        $("#txtCodigo").val(codigo); 
-       	$("#txtSexo").val(usuario.Sexo); 
-  	   	$("#txtTitulo").val(usuario.Titulo);
- 		$("#txtPrimeiro").val(usuario.Primeiro);
-	    $("#txtUltimo").val(usuario.Ultimo);
-    	$("#txtRua").val(usuario.Rua);
-    	$("#txtCidade").val(usuario.Cidade);
-    	$("#txtEstado").val(usuario.Estado);
-    	$("#txtCep").val(usuario.Cep);
-    	$("#txtUsuario").val(usuario.Usuario);
- 		$("#txtEmail").val(usuario.Email);
-    	$("#txtSenha").val(usuario.Senha);
-    	$("#txtTelefone").val(usuario.Telefone);
- 		$("#txtCelular").val(usuario.Celular);
- 		$("#txtNacionalidade").val(usuario.Nacionalidade);
- 		$("#txtLarge").val(usuario.Large);
- 		$("#txtMedium").val(usuario.Medium);
- 		$("#txtThumbnail").val(usuario.Thumbnail);
-       	$("#txtCodigo").attr("readonly","readonly"); 
-       	$("#txtSexo").focus();
-
-	} 
-});
-
-function Editar(){ 
-	listaUsuarios[id] = JSON.stringify({ 
-		
-		Sexo : $("#txtSexo").val(),
-    	Titulo : $("#txtTitulo").val(),
- 		Primeiro : $("#txtPrimeiro").val(),
-    	Ultimo : $("#txtUltimo").val(),
-    	Rua : $("#txtRua").val(),
-    	Cidade : $("#txtCidade").val(),
-    	Estado : $("#txtEstado").val(),
-    	Cep : $("#txtCep").val(),
-    	Usuario : $("#txtUsuario").val(),
- 		Email : $("#txtEmail").val(),
-    	Senha : $("#txtSenha").val(),
-    	Telefone : $("#txtTelefone").val(),
- 		Celular : $("#txtCelular").val(),
- 		Large : $("#txtLarge").val(),
- 		Medium : $("#txtMedium").val(),
- 		Thumbnail : $("#txtThumbnail").val(),
- 		Nacionalidade : $("#txtNacionalidade").val()
- 	}); 
-	window.localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios)); 
-	alert("Registro editado."); 
-	return  $(window.document.location).attr('href','lista.html');     
-}
-
-$(document).ready(function(){
-    $("form").submit(function(){
-        return Editar(); 
+        }
     });
-});
 
+    function Editar() 
+    {
+        listaUsuarios[id] = JSON.stringify({
+
+            Sexo: $("#txtSexo").val(),
+            Titulo: $("#txtTitulo").val(),
+            Primeiro: $("#txtPrimeiro").val(),
+            Ultimo: $("#txtUltimo").val(),
+            Rua: $("#txtRua").val(),
+            Cidade: $("#txtCidade").val(),
+            Estado: $("#txtEstado").val(),
+            Cep: $("#txtCep").val(),
+            Usuario: $("#txtUsuario").val(),
+            Email: $("#txtEmail").val(),
+            Senha: $("#txtSenha").val(),
+            Telefone: $("#txtTelefone").val(),
+            Celular: $("#txtCelular").val(),
+            Large: $("#txtLarge").val(),
+            Medium: $("#txtMedium").val(),
+            Thumbnail: $("#txtThumbnail").val(),
+            Nacionalidade: $("#txtNacionalidade").val()
+        });
+        window.localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+
+        var result = confirm("confirma Alteração?");
+        if (result == true) 
+        {
+            verifica = result;
+           window.localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+        }
+        return true;
+    }
+   
+  
+        $(document).ready(function ()
+         {
+            $("form").submit(function () 
+            {
+                return Editar();
+
+            });
+         });
+      
+   
 
 </script>
 
@@ -98,118 +112,109 @@ $(document).ready(function(){
 <body>
 
 	<header>
-		<h1>Trabalho Prático WEB Mobie</h1>
+		<h1><i>Trabalho Prático WEB Mobile</i></h1>
 	</header>
 
 	<nav>
-		<ul>
-  			<li><a href="lista.html">Lista de Usuários</a></li>
-  			<li><a href="index.html">Cadastro de Usuários</a></li>
+		<ul class="nav nav-pills">
+  			<li role="presentation"><a href="lista.html"><span style="font-size: large">Lista de Usuários</a></span></li>
+  			<li role="presentation" class="active"><a href="index.html"><span style="font-size: large">Cadastro de Usuários</a></span></li>
   		</ul>
 	</nav>
 
 	<section>
 
-	<h2>Editar Usuário</h2>
+	<h2><i>Editar informações do usuário</i></h2>
+	
 	<article>
-		<form >
-			<ul>
-				<li>
-					<label for="txtUsuario">Usuario:</label>
-				</li>
-				<li>
-					<label for="txtCodigo">Codigo:</label>
-					<input type="label" id="txtCodigo"/>
-				</li>
-				<li>
-					<label for="txtSexo">Sexo:</label>
-					<input type="text" id="txtSexo"/>
-				</li>
-				<li><label for="txtNome">Nome:</label>
-					<ul>	
-						<li>
-							<label for="txtTitulo">Título:</label>
-							<input type="text" id="txtTitulo"/>
-						</li>
-						<li>
-							<label for="txtPrimeiro">Primeiro:</label>
-							<input type="text" id="txtPrimeiro"/>
-						</li>
-						<li>
-							<label for="txtUltimo">Último:</label>
-							<input type="text" id="txtUltimo"/>
-						</li>
-					</ul>
-				</li>
-				
-				<li><label for="txtEndereco">Endereço:</label>
-					<ul>
-						<li>
-							<label for="txtRua">Rua:</label>
-							<input type="text" id="txtRua"/>
-						</li>
-						<li>
-							<label for="txtCidade">Cidade:</label>
-							<input type="text" id="txtCidade"/>
-						</li>
-						<li>
-							<label for="txtEstado">Estado:</label>
-							<input type="text" id="txtEstado"/>
-						</li>
-						<li>
-							<label for="txtCep">Cep:</label>
-							<input type="text" id="txtCep"/>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<label for="txtEmail">Email:</label>
-					<input type="text" id="txtEmail"/>
-				</li>
-				<li>
-					<label for="txtUsuario">Usuario:</label>
-					<input type="text" id="txtUsuario"/>
-				</li>
-				<li>
-					<label for="txtSenha">Senha:</label>
-					<input type="text" id="txtSenha"/>
-				</li>
-				<li>
-					<label for="txtTelefone">Telefone:</label>
-					<input type="text" id="txtTelefone"/>
-				</li>
-				<li>
-					<label for="txtCelular">Celular:</label>
-					<input type="text" id="txtCelular"/>
-				</li>
-				<li>
-					<label for="txtNacionalidade">Nacionalidade:</label>
-					<input type="text" id="txtNacionalidade"/>
-				</li>
-				<li><label for="txtImagem">Imagem:</label>
-					<ul>
-						<li>
-							<label for="txtLarge">Large:</label>
-							<input type="text" id="txtLarge"/>
-						</li>
-						<li>
-							<label for="txtMedium">Medium:</label>
-							<input type="text" id="txtMedium"/>
-						</li>
-						<li>
-							<label for="txtThumbnail">Thumbnail:</label>
-							<input type="text" id="txtThumbnail"/>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<input type="submit" value="Salvar" id="btnSalvar"/>
-				</li>
-
-
-			</ul>	
-
-		</form>
+		<form role="form">
+			<div class="input-group">
+			     <span class="input-group-addon"  >Usuário</span>
+      
+			</div>
+			<div class="input-group">
+                <label class="input-group-addon" for="txtSexo">Sexo:</Label>
+                 <input  type="text" id="txtSexo" class="form-control"  aria-describedby="basic-addon1">
+   	  	    </div>
+            <div class="input-group">
+				<Label class="input-group-addon" for="txtNome">Nome</Label>
+ 					</div>
+            <div class="input-group">
+							<Label class="input-group-addon" for="txtTitulo">Título:</Label>
+							<input type="text" id="txtTitulo" class="form-control"  aria-describedby="basic-addon1"/>
+						</div>
+            <div class="input-group">
+							<Label class ="input-group-addon" for="txtPrimeiro">Primeiro:</Label>
+							<input type="text" id="txtPrimeiro" class="form-control"  aria-describedby="basic-addon1"/>
+						</div>
+            <div class="input-group">
+							<Label class="input-group-addon" for="txtUltimo">Último:</Label>
+							<input type="text" id="txtUltimo" class="form-control" placeholder="Último:" aria-describedby="basic-addon1"/>
+						</div>
+		   <div class="input-group">
+                        <span class="input-group-addon" id="txtEndereco">Endereço</span>
+   
+				</div>
+            <div class="input-group">
+							<Label  class="input-group-addon" for="txtRua">Rua:</Label>
+							<input type="text" id="txtRua" class="form-control"  aria-describedby="basic-addon1"/>
+						</div>
+            <div class="input-group">
+							<Label class="input-group-addon" for="txtCidade">Cidade:</Label>
+							<input type="text" id="txtCidade" class="form-control"  aria-describedby="basic-addon1"/>
+						</div>
+            <div class="input-group">
+							<Label  class="input-group-addon" for="txtEstado">Estado:</Label>
+							<input type="text" id="txtEstado" class="form-control"  aria-describedby="basic-addon1"/>
+						</div>
+            <div class="input-group">
+							<Label class="input-group-addon" for="txtCep">Cep:</Label>
+							<input type="text" id="txtCep"class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+            <div class="input-group">
+					<Label  class="input-group-addon" for="txtEmail">Email:</Label>
+					<input type="text" id="txtEmail" class="form-control" aria-describedby="basic-addon1"/>
+			</div>
+            <div class="input-group">
+					<Label class="input-group-addon" for="txtUsuario">Usuario:</Label>
+					<input type="text" id="txtUsuario"class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+            <div class="input-group">
+					<Label class="input-group-addon" for="txtSenha">Senha:</Label>
+					<input type="text" id="txtSenha" class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+            <div class="input-group">
+					<Label class="input-group-addon" for="txtTelefone">Telefone:</Label>
+					<input type="text" id="txtTelefone"class="form-control"  aria-describedby="basic-addon1"/>
+			</div>
+            <div class="input-group">
+					<Label class="input-group-addon" for="txtCelular">Celular:</Label>
+					<input type="text" id="txtCelular"class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+            <div class="input-group">
+					<Label class="input-group-addon" for="txtNacionalidade">Nacionalidade:</Label>
+                    <label for="txtNacionalidade"></label>
+					<input type="text" id="txtNacionalidade" class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+            <div class="input-group">
+                <label class="input-group-addon" for="txtImagem">Imagem</label>
+					</div>
+            <div class="input-group">
+							<label class="input-group-addon" for="txtLarge">Large:</label>
+							<input type="text" id="txtLarge"class="form-control"  aria-describedby="basic-addon1"/>
+						</div>
+            <div class="input-group">
+							<label class="input-group-addon" for="txtMedium">Medium:</label>
+							<input type="text" id="txtMedium" class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+            <div class="input-group">
+							<label class="input-group-addon" for="txtThumbnail">Thumbnail:</label>
+							<input type="text" id="txtThumbnail" class="form-control"  aria-describedby="basic-addon1"/>
+				</div>
+               <div class="input-group">
+					<button type="submit" value="Salvar" id="btnSalvar" class="btn btn-primary">Salvar</button>
+                   </div>
+	</form>
 
 	</article>
 

@@ -3,7 +3,9 @@
 	<head>
 		<title>Trabalho Prático WEB Mobile</title>
 		<meta charset="utf-8">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
 </script>
@@ -59,23 +61,26 @@ $("#lista").on("click", ".btnExcluir", function(){
 <body>
 
 	<header>
-		<h1>Trabalho Prático WEB Mobie</h1>
+		<h1><i>Trabalho Prático WEB Mobile</i></h1>
 	</header>
 
 	<nav>
-		<ul>
-  			<li><a href="lista.html">Lista de Usuários</a></li>
-  			<li><a href="index.html">Cadastro de Usuários</a></li>
+		<ul class="nav nav-pills">
+  			<li role="presentation"class="active"><a href="lista.html"><span style="font-size: large">Lista de Usuários</a></span></li>
+  			<li role="presentation" ><a href="index.html"><span style="font-size: large">Cadastro de Usuários</a></span></li>
   		</ul>
 	</nav>
 
 	<section>
 
-	<h2>Lista de Usuários</h2>
+	
 	<article>
-		<table id="lista">
+        <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading" >Lista de Usuários</div>
+		<table id="lista" class="table" style="font-size: small">
 
-		</table>
+		</table></div>
 	</article>
 
 	</section>
